@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ArrowDown, ArrowUpRight } from "lucide-react"
+import { PixelLobby } from "@/components/pixel-lobby"
 import { PixelShooterGame } from "@/components/pixel-shooter-game"
 
 export function HeroSection() {
@@ -64,9 +65,7 @@ export function HeroSection() {
         </motion.aside>
       </div>
 
-      <div className="hero-transition" aria-hidden="true">
-        <span>SCROLL TO UNLOCK SIDE QUEST</span>
-      </div>
+      <PixelLobby />
 
       <motion.div
         className="hero-game-stage"
