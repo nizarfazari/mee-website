@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { ArrowDown, ArrowUpRight, Code2, Link2, Mail, Moon, Sparkles, Sun, Terminal, Trophy, UserRound, Zap } from "lucide-react"
+import { ArrowUpRight, Code2, Link2, Mail, Moon, Sparkles, Sun, Terminal, Trophy, UserRound, Zap } from "lucide-react"
+import { HeroSection } from "@/components/hero-section"
 
 const skills = [
   { name: "TypeScript", level: "MASTERED", value: 92, color: "bg-cyan-400" },
@@ -37,20 +38,7 @@ export function PixelPortfolio() {
       </nav>
 
       <main id="top">
-        <section className="hero section-wrap">
-          <div className="hero-copy">
-            <div className="eyebrow"><span className="status-dot" /> AVAILABLE FOR NEW QUESTS</div>
-            <h1>BUILDING<br /><span>WORLDS</span><br />ONE <i>PIXEL</i><br />AT A TIME.</h1>
-            <p className="hero-sub">I&apos;m Alex Morgan, a product-minded developer crafting vibrant digital experiences where thoughtful code meets playful design.</p>
-            <div className="hero-actions"><a href="#quests" className="pixel-button primary">VIEW MY QUESTS <ArrowDown /></a><a href="#contact" className="pixel-button secondary">SAY HELLO <ArrowUpRight /></a></div>
-          </div>
-          <motion.div className="hero-art" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}>
-            <div className="level-badge"><span>LVL</span><strong>07</strong></div>
-            <motion.div className="sprite-frame" animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}><img src="/pixel-hero.png" alt="Pixel art avatar of Alex Morgan" /></motion.div>
-            <div className="speech-bubble">WELCOME, TRAVELER.<br /><span>LET&apos;S MAKE SOMETHING GREAT.</span></div>
-            <div className="hero-ground" />
-          </motion.div>
-        </section>
+        <HeroSection />
 
         <section className="stats-bar section-wrap" aria-label="Developer stats"><Stat icon={<Code2 />} label="LINES SHIPPED" value="128K+" /><Stat icon={<Trophy />} label="QUESTS COMPLETE" value="42" /><Stat icon={<Zap />} label="COFFEE POWERED" value="∞" /><Stat icon={<Sparkles />} label="BUGS DEFEATED" value="999+" /></section>
 
