@@ -1,8 +1,10 @@
 "use client"
 
-import { useState } from "react"
-import { ArrowUpRight, ChevronLeft, ChevronRight, Code2, Download, Send, Star } from "lucide-react"
+import { useEffect, useState } from "react"
+import { ArrowUpRight, Code2, Download, Send, Star } from "lucide-react"
 import { HeroSection } from "@/components/hero-section"
+import { GameboyNav } from "@/components/portfolio/gameboy-nav"
+import { MicroLoader } from "@/components/portfolio/micro-loader"
 
 const inventorySkills = [
   { code: "TS", name: "TypeScript", level: 10, group: "Frontend", description: "Typed JavaScript for scalable, maintainable applications." },
@@ -45,15 +47,16 @@ const notes = [
 
 export function PixelPortfolio() {
   const [sent, setSent] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [selectedSkill, setSelectedSkill] = useState(inventorySkills[0])
   const [activeSection, setActiveSection] = useState("top")
-  const navigateRelative = (direction: number) => {
-    const currentIndex = navigationItems.findIndex((item) => item.id === activeSection)
-    const nextIndex = (currentIndex + direction + navigationItems.length) % navigationItems.length
-    setActiveSection(navigationItems[nextIndex].id)
-  }
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIsLoading(false), 420)
+    return () => window.clearTimeout(timer)
+  }, [])
 
   return <div className={`meadow-site view-${activeSection}`}>
+    {isLoading && <MicroLoader />}
     <div className="side-scenery" aria-hidden="true"><span className="scenery-tree scenery-left" /><span className="scenery-fence" /><span className="scenery-bush scenery-left-bush" /><span className="scenery-tree scenery-right" /><span className="scenery-mailbox" /><span className="scenery-bush scenery-right-bush" /><span className="scenery-board" /><span className="scenery-chest" /><span className="scenery-lamp" /></div>
     <main className="spa-main">
       <div className="spa-view" key={activeSection}>
@@ -66,7 +69,7 @@ export function PixelPortfolio() {
       {activeSection === "contact" && <section className="section-wrap contact-section view-section"><div className="mailbox"><div><span className="stamp">POSTAGE PRE-PAID</span><Heading kicker="HOMESTEAD MAILBOX" title="SEND A LETTER" text="Have a project in mind? Let’s build something useful together." /></div><form onSubmit={event => { event.preventDefault(); setSent(true) }}><label>YOUR NAME<input required name="name" placeholder="Name" /></label><label>YOUR EMAIL<input required type="email" name="email" placeholder="you@example.com" /></label><label>YOUR MESSAGE<textarea required name="message" rows={4} placeholder="Tell me about your project..." /></label><button className="rpg-button primary" type="submit">SEND VIA CARRIER PIGEON <Send /></button>{sent && <p className="form-success">LETTER SENT! I&apos;LL REPLY SOON.</p>}</form></div><div className="contact-links"><a href="https://github.com/nizarfazari" target="_blank" rel="noreferrer">GITHUB</a><a href="https://www.linkedin.com/in/nizarfazari/" target="_blank" rel="noreferrer">LINKEDIN</a><a href="mailto:hello@nizar.dev">EMAIL</a><a className="resume-link" href="/Nizar-Fazari-Resume.pdf" download>DOWNLOAD RESUME <Download /></a></div><small className="contact-credit">© 2025 NIZAR FAZARI · BUILT WITH CARE.</small></section>}
       </div>
     </main>
-    <nav className="gameboy-nav" aria-label="Primary navigation"><button type="button" className="gameboy-side-button" onClick={() => navigateRelative(-1)} aria-label="Open previous view"><ChevronLeft /></button><div className="gameboy-tabs">{navigationItems.map((item) => <button type="button" key={item.id} onClick={() => setActiveSection(item.id)} className={activeSection === item.id ? "active" : ""} aria-current={activeSection === item.id ? "page" : undefined}>{item.label}</button>)}</div><button type="button" className="gameboy-side-button" onClick={() => navigateRelative(1)} aria-label="Open next view"><ChevronRight /></button></nav>
+    <GameboyNav items={navigationItems} activeItem={activeSection} onNavigate={setActiveSection} />
   </div>
 }
 function Heading({ kicker, title, text }: { kicker: string; title: string; text: string }) { return <div className="heading"><span>{kicker}</span><h2>{title}</h2><p>{text}</p></div> }

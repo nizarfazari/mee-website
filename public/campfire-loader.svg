@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="90" viewBox="0 0 200 90" shape-rendering="crispEdges">
+  <rect y="76" width="200" height="14" fill="#588157"/>
+  <rect y="74" width="200" height="4" fill="#3a5a40"/>
+  <!-- villager seated on the grass, facing the fire -->
+  <rect x="31" y="34" width="17" height="16" fill="#e7aa78"/><rect x="28" y="31" width="21" height="8" fill="#4c3428"/><rect x="26" y="36" width="7" height="9" fill="#4c3428"/><rect x="34" y="51" width="19" height="14" fill="#588157"/><rect x="31" y="54" width="5" height="12" fill="#3a5a40"/><rect x="43" y="65" width="27" height="6" fill="#2d1c12"/><rect x="54" y="69" width="15" height="5" fill="#2d1c12"/><rect x="35" y="68" width="15" height="5" fill="#2d1c12"/>
+  <!-- firewood and campfire -->
+  <rect x="96" y="69" width="38" height="6" fill="#5c3d28"/><rect x="101" y="65" width="28" height="6" fill="#8b5a2b"/><path d="M115 34h7v12h6v17h-19V50h6z" fill="#e76f51"/><path d="M118 42h5v9h3v9h-12v-9h4z" fill="#e9c46a"/><rect x="118" y="51" width="5" height="8" fill="#fff9eb"/>
+  <!-- kettle and smoke -->
+  <rect x="148" y="61" width="17" height="13" fill="#457b9d"/><rect x="151" y="55" width="10" height="7" fill="none" stroke="#2d1c12" stroke-width="3"/><path d="M165 64h9l-9 5z" fill="#2d1c12"/><rect x="155" y="46" width="4" height="5" fill="#fff9eb" opacity=".8"/><rect x="160" y="37" width="4" height="5" fill="#fff9eb" opacity=".55"/><rect x="156" y="28" width="4" height="5" fill="#fff9eb" opacity=".3"/>
+</svg>
