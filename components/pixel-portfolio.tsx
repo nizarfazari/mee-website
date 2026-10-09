@@ -1,120 +1,76 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { motion } from "framer-motion"
-import { ArrowUpRight, Bug, Code2, Coffee, Download, FileText, Mail, Moon, Sparkles, Sun, Terminal, Trophy, UserRound, Zap } from "lucide-react"
+import { useState } from "react"
+import { ArrowUpRight, ChevronLeft, ChevronRight, Code2, Download, Send, Star } from "lucide-react"
 import { HeroSection } from "@/components/hero-section"
 
-const skills = [
-  { name: "TypeScript", level: "MASTERED", value: 92, color: "bg-cyan-400" },
-  { name: "React / Next.js", level: "MASTERED", value: 88, color: "bg-violet-400" },
-  { name: "Node.js", level: "ADVANCED", value: 78, color: "bg-emerald-400" },
-  { name: "UI Engineering", level: "ADVANCED", value: 84, color: "bg-orange-300" },
+const inventorySkills = [
+  { code: "TS", name: "TypeScript", level: 10, group: "Frontend", description: "Typed JavaScript for scalable, maintainable applications." },
+  { code: "JS", name: "JavaScript", level: 9, group: "Frontend", description: "The foundation for interactive experiences on the web." },
+  { code: "RX", name: "React", level: 9, group: "Frontend", description: "Component-driven interfaces built with care." },
+  { code: "NX", name: "Next.js", level: 8, group: "Frontend", description: "Production-ready React applications and full-stack delivery." },
+  { code: "ND", name: "Node.js", level: 8, group: "Backend", description: "Reliable services, APIs, and developer tooling." },
+  { code: "GO", name: "Golang", level: 6, group: "Backend", description: "Pragmatic backend services where performance matters." },
+  { code: "SQL", name: "SQL", level: 8, group: "Data", description: "Clear data models and query patterns." },
+  { code: "PG", name: "PostgreSQL", level: 8, group: "Data", description: "Dependable relational data for product systems." },
+  { code: "RD", name: "Redis", level: 6, group: "Data", description: "Fast caching and lightweight data workflows." },
+  { code: "DK", name: "Docker", level: 7, group: "Infrastructure", description: "Repeatable environments from local work to deployment." },
+  { code: "LN", name: "Linux", level: 7, group: "Infrastructure", description: "Comfortable working close to the systems that run products." },
+  { code: "GT", name: "Git", level: 9, group: "Workflow", description: "Collaborative version control and careful release habits." },
 ]
-
-const quests = [
-  { title: "Neon Commerce", type: "FULL-STACK CASE STUDY", text: "A headless commerce experience built for speed, storytelling, and delightful checkouts.", tags: ["Next.js", "Stripe", "Postgres"], color: "from-cyan-500/30 to-violet-500/20" },
-  { title: "Signal Dashboard", type: "UI SYSTEM CASE STUDY", text: "An observability command center that turns noisy data into a clear next action.", tags: ["React", "Tailwind", "D3.js"], color: "from-orange-400/25 to-pink-500/20" },
-  { title: "Campfire Notes", type: "COLLABORATION TOOL", text: "A calm, collaborative writing space for teams who think better together.", tags: ["TypeScript", "Supabase", "Motion"], color: "from-emerald-400/25 to-cyan-500/20" },
+const projects = [
+  { name: "Marketly Commerce", type: "LEGENDARY CONTRACT", status: "COMPLETED ★★★", text: "A fast, story-led commerce experience designed for simple, confident checkout journeys.", tech: ["Next.js", "Stripe", "Postgres"], reward: "12,000G · 450 EXP" },
+  { name: "Signal Dashboard", type: "TOWN CONTRACT", status: "COMPLETED ★★★", text: "An observability workspace that turns noisy product data into clear next actions.", tech: ["React", "Tailwind", "D3.js"], reward: "9,500G · 360 EXP" },
+  { name: "Field Notes", type: "ACTIVE BOUNTY", status: "IN PROGRESS · 85%", text: "A calm, collaborative writing space for teams that need clarity and momentum.", tech: ["TypeScript", "Supabase", "Motion"], reward: "7,200G · 280 EXP" },
+  { name: "Village Ledger", type: "TOWN CONTRACT", status: "COMPLETED ★★★", text: "A dependable internal tool for tracking operational work without unnecessary complexity.", tech: ["Node.js", "REST API", "Postgres"], reward: "8,800G · 320 EXP" },
 ]
-
 const timeline = [
-  ["2024 — NOW", "Full-stack quests", "Independent Builder", "Building reliable interfaces, APIs, and developer-friendly systems."],
-  ["2022 — 2024", "Product engineering arc", "Web Platforms", "Turned ambitious product ideas into accessible, polished experiences."],
-  ["2020 — 2022", "Frontend foundations", "Digital Products", "Learned to make complex interactions feel simple, fast, and useful."],
+  ["YEAR 4 · PRESENT", "Full-stack Engineer", "Independent Builder", "Building reliable interfaces, APIs, and developer-friendly systems."],
+  ["YEAR 2–3", "Product Engineer", "Web Platforms", "Turned ambitious product ideas into accessible, polished experiences."],
+  ["YEAR 1", "Frontend Developer", "Digital Products", "Learned to make complex interactions feel simple, fast, and useful."],
+]
+const navigationItems = [
+  { id: "top", label: "HOME" },
+  { id: "projects", label: "QUESTS" },
+  { id: "skills", label: "BAG" },
+  { id: "experience", label: "BOARD" },
+  { id: "contact", label: "MAIL" },
 ]
 
-const achievements = [
-  { icon: <Bug />, title: "DETAIL ORIENTED", text: "I look for the edge cases that shape a reliable product." },
-  { icon: <Zap />, title: "DELIVERY MINDED", text: "I value practical progress and clean, maintainable releases." },
-  { icon: <Code2 />, title: "PRODUCT FOCUSED", text: "I connect engineering decisions to real user needs." },
-  { icon: <Coffee />, title: "CONTINUOUSLY LEARNING", text: "I stay curious about better tools, systems, and ways of working." },
-]
-
-const articles = [
-  { date: "ENGINEERING NOTES", title: "Designing interfaces that make complex work feel simple", text: "A short note on translating product constraints into calm, understandable UI decisions." },
-  { date: "SYSTEMS", title: "What I look for before shipping a new feature", text: "A practical checklist for balancing speed, quality, accessibility, and maintainability." },
-  { date: "CAREER", title: "Building a developer workflow that leaves room to think", text: "Small habits that help turn ambiguous requirements into steady progress." },
+const notes = [
+  ["ENGINEERING NOTES", "Designing interfaces that make complex work feel simple"],
+  ["SYSTEMS", "What I look for before shipping a new feature"],
+  ["CAREER", "Building a developer workflow that leaves room to think"],
 ]
 
 export function PixelPortfolio() {
-  const [dark, setDark] = useState(true)
-  const [showSecret, setShowSecret] = useState(false)
-  const siteRef = useRef<HTMLDivElement>(null)
+  const [sent, setSent] = useState(false)
+  const [selectedSkill, setSelectedSkill] = useState(inventorySkills[0])
+  const [activeSection, setActiveSection] = useState("top")
+  const navigateRelative = (direction: number) => {
+    const currentIndex = navigationItems.findIndex((item) => item.id === activeSection)
+    const nextIndex = (currentIndex + direction + navigationItems.length) % navigationItems.length
+    setActiveSection(navigationItems[nextIndex].id)
+  }
 
-  useEffect(() => {
-    const site = siteRef.current
-    const desktopQuery = window.matchMedia("(min-width: 801px)")
-    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    let frameId = 0
-
-    const reset = () => {
-      site?.style.setProperty("--landscape-parallax", "0px")
-      site?.style.setProperty("--map-parallax", "0px")
-    }
-
-    const updateParallax = () => {
-      frameId = 0
-      if (!site || !desktopQuery.matches || reducedMotionQuery.matches) {
-        reset()
-        return
-      }
-
-      const scroll = Math.min(window.scrollY, 1200)
-      site.style.setProperty("--landscape-parallax", `${Math.round(scroll * -0.045)}px`)
-      site.style.setProperty("--map-parallax", `${Math.round(scroll * -0.018)}px`)
-    }
-
-    const requestUpdate = () => {
-      if (!frameId) frameId = window.requestAnimationFrame(updateParallax)
-    }
-
-    requestUpdate()
-    window.addEventListener("scroll", requestUpdate, { passive: true })
-    desktopQuery.addEventListener("change", requestUpdate)
-    reducedMotionQuery.addEventListener("change", requestUpdate)
-
-    return () => {
-      window.removeEventListener("scroll", requestUpdate)
-      desktopQuery.removeEventListener("change", requestUpdate)
-      reducedMotionQuery.removeEventListener("change", requestUpdate)
-      if (frameId) window.cancelAnimationFrame(frameId)
-    }
-  }, [])
-
-  return (
-    <div ref={siteRef} className={dark ? "pixel-site dark" : "pixel-site light"}>
-      <div className="scanlines" aria-hidden="true" />
-      <nav className="top-nav">
-        <a href="#top" className="brand" aria-label="Nizar Fazari portfolio home"><span className="brand-mark">◆</span> NIZAR<span className="brand-muted">.DEV</span></a>
-        <div className="nav-links"><a href="#projects">PROJECTS</a><a href="#skills">EXPERTISE</a><a href="#experience">EXPERIENCE</a><a href="#notes">NOTES</a><a href="#contact">CONTACT</a></div>
-        <button className="theme-toggle" onClick={() => setDark(!dark)} aria-label={dark ? "Use light theme" : "Use dark theme"}>{dark ? <Sun /> : <Moon />}<span>{dark ? "DAY MODE" : "NIGHT MODE"}</span></button>
-      </nav>
-
-      <main id="top">
-        <HeroSection />
-
-        <section className="stats-bar section-wrap" aria-label="Professional focus"><Stat icon={<Code2 />} label="CORE FOCUS" value="FULL STACK" /><Stat icon={<Trophy />} label="APPROACH" value="PRODUCT LED" /><Stat icon={<Zap />} label="PRIORITY" value="QUALITY" /><Stat icon={<Sparkles />} label="WORK STYLE" value="CURIOUS" /></section>
-
-        <section id="projects" className="content-section section-wrap"><SectionHeading kicker="01 / SELECTED WORK" title="FEATURED PROJECTS" text="A selection of product and engineering work." />
-          <div className="quest-grid">{quests.map((quest, i) => <motion.article className={`quest-card bg-gradient-to-br ${quest.color}`} key={quest.title} whileHover={{ y: -8, rotate: i % 2 ? 1 : -1 }} transition={{ type: "spring", stiffness: 300 }}><div className="quest-icon"><Terminal /></div><span className="quest-type">{quest.type}</span><h3>{quest.title}</h3><p>{quest.text}</p><div className="tag-row">{quest.tags.map(tag => <span key={tag}>{tag}</span>)}</div><a href="#contact" className="card-link">VIEW PROJECT <ArrowUpRight /></a></motion.article>)}</div>
-        </section>
-
-        <section id="skills" className="content-section section-wrap split-section"><div><SectionHeading kicker="02 / EXPERTISE" title="TECHNICAL STRENGTHS" text="Tools and practices I use to ship thoughtful digital products." /><div className="skill-list">{skills.map(skill => <div className="skill-row" key={skill.name}><div className="skill-meta"><span>{skill.name}</span><small>{skill.level}</small></div><div className="bar"><motion.div className={skill.color} initial={{ width: 0 }} whileInView={{ width: `${skill.value}%` }} viewport={{ once: true }} transition={{ duration: 1 }} /></div></div>)}</div></div><div className="terminal-card"><div className="terminal-top"><span /><span /><span /><b>nizar@portfolio:~</b></div><div className="terminal-body"><p><em>const</em> developer = {'{'}</p><p className="indent">name: <strong>&quot;Nizar Fazari&quot;</strong>,</p><p className="indent">role: <strong>&quot;Software Engineer&quot;</strong>,</p><p className="indent">superpower: <strong>&quot;Making ideas work&quot;</strong>,</p><p className="indent">status: <strong className="green">&quot;always learning&quot;</strong></p><p>{'}'}</p><p className="cursor-line">$ <span>_</span></p></div></div></section>
-
-        <section id="experience" className="content-section section-wrap"><SectionHeading kicker="03 / EXPERIENCE" title="CAREER TIMELINE" text="A focused record of the work and lessons behind each chapter." /><div className="timeline">{timeline.map((item, i) => <div className="timeline-item" key={item[0]}><div className="timeline-marker">{String(i + 1).padStart(2, "0")}</div><div><span className="timeline-date">{item[0]}</span><h3>{item[1]}</h3><strong>{item[2]}</strong><p>{item[3]}</p></div></div>)}</div></section>
-
-        <section className="content-section section-wrap"><SectionHeading kicker="04 / WORKING PRINCIPLES" title="HOW I BUILD" text="The habits that guide my work from first idea to release." /><div className="achievement-grid">{achievements.map((achievement) => <article className="achievement-card" key={achievement.title}><div className="achievement-icon">{achievement.icon}</div><div><h3>{achievement.title}</h3><p>{achievement.text}</p></div></article>)}</div></section>
-
-        <section id="notes" className="content-section section-wrap"><SectionHeading kicker="05 / NOTES" title="FROM THE WORKBENCH" text="Short thoughts on building products, systems, and better developer habits." /><div className="article-grid">{articles.map((article) => <article className="article-card" key={article.title}><FileText className="article-icon" /><span>{article.date}</span><h3>{article.title}</h3><p>{article.text}</p><a href="#contact" className="card-link">READ NOTE <ArrowUpRight /></a></article>)}</div></section>
-
-        <section id="contact" className="contact-section section-wrap"><div className="contact-card"><div><span className="eyebrow">LET&apos;S BUILD SOMETHING USEFUL</span><h2>HAVE A PROJECT<br /><span>IN MIND?</span></h2><p>I&apos;m always open to discussing thoughtful products, collaborative teams, and meaningful engineering challenges.</p></div><div className="contact-actions"><a href="mailto:hello@nizar.dev" className="pixel-button primary">START A CONVERSATION <Mail /></a><a href="/Nizar-Fazari-Resume.pdf" className="resume-link" download>DOWNLOAD RESUME <Download /></a></div></div></section>
-      </main>
-
-      <footer className="footer section-wrap"><span>© 2025 NIZAR FAZARI / DESIGNED &amp; BUILT WITH CARE</span><div><a href="https://github.com/nizarfazari" target="_blank" rel="noreferrer" aria-label="Nizar Fazari on GitHub"><span className="social-monogram">GH</span></a><a href="https://www.linkedin.com/in/nizarfazari/" target="_blank" rel="noreferrer" aria-label="Nizar Fazari on LinkedIn"><span className="social-monogram">IN</span></a><a href="mailto:hello@nizar.dev" aria-label="Email Nizar Fazari"><Mail /></a><button onClick={() => setShowSecret(!showSecret)} aria-label="Open secret"><UserRound /></button></div>{showSecret && <span className="secret">YOU FOUND THE HIDDEN CHEST.</span>}</footer>
-    </div>
-  )
+  return <div className="meadow-site">
+    <header className="hud-header">
+      <div className="hud-main section-wrap"><button className="hud-brand" type="button" onClick={() => setActiveSection("top")}>[ MEADOW.DEV ]</button><span className="hud-location">WORKSHOP MEADOW</span><div className="hud-status"><span>YR 4 · SPR 18</span><strong>99,999G</strong><i>NF</i></div></div>
+      <div className="hud-sub"><div className="section-wrap"><span>ZONE: WORKSHOP MEADOW</span><span>BUFF: +3 PROBLEM SOLVING</span><span>BUFF: +2 COFFEE FOCUS</span></div></div>
+    </header>
+    <main className="spa-main">
+      <div className="spa-view" key={activeSection}>
+      {activeSection === "top" && <><HeroSection onNavigate={setActiveSection} />
+      <section className="player-hud section-wrap" aria-label="Professional stats"><Meter label="HEALTH / RELIABILITY" value="92" color="health" /><Meter label="ENERGY / DELIVERY" value="86" color="energy" /><Meter label="MANA / FOCUS" value="88" color="mana" /><div className="gold-slot"><Star /> <b>AVAILABLE</b><small>FOR COLLABORATION</small></div></section></>}
+      {activeSection === "projects" && <section className="section-wrap content-section view-section"><Heading kicker="QUEST LOG / SELECTED WORK" title="THE TOWN'S NOTICE BOARD" text="A selection of product and engineering work." /><div className="quest-board">{projects.map(project => <article className="quest-card" key={project.name}><div className="quest-preview"><Code2 /><span>PROJECT PREVIEW</span></div><div className="quest-content"><span className="quest-type">{project.type}</span><span className={project.status.startsWith("IN") ? "quest-status active" : "quest-status"}>{project.status}</span><h3>{project.name}</h3><p>{project.text}</p><div className="tech-pills">{project.tech.map(tech => <span key={tech}>{tech}</span>)}</div><div className="quest-footer"><small>REWARD: {project.reward}</small><a href="#contact">VIEW CASE STUDY <ArrowUpRight /></a></div></div></article>)}</div></section>}
+      {activeSection === "skills" && <section className="section-wrap content-section view-section"><Heading kicker="BACKPACK / TOOL SHED" title="MY INVENTORY" text="Tools I reach for when building useful digital products." /><div className="inventory-layout"><div><div className="inventory-label"><span>BACKPACK CAPACITY</span><b>{inventorySkills.length} / 36 ITEMS</b></div><div className="inventory-grid" role="list" aria-label="Technical skills inventory">{Array.from({ length: 36 }, (_, index) => { const skill = inventorySkills[index]; return skill ? <button type="button" role="listitem" aria-pressed={selectedSkill.code === skill.code} className={`inventory-slot filled ${skill.group.toLowerCase()}${selectedSkill.code === skill.code ? " selected" : ""}`} key={skill.code} onClick={() => setSelectedSkill(skill)}><b>{skill.code}</b><small>L{skill.level}</small><span className="sr-only">{skill.name}, level {skill.level}</span></button> : <span className="inventory-slot" role="listitem" aria-label="Empty inventory slot" key={index} /> })}</div></div><aside className="item-tooltip" aria-live="polite"><span>ITEM INSPECT</span><div className="item-heading"><h3>{selectedSkill.name}</h3><b>LV {selectedSkill.level}</b></div><small className="item-group">{selectedSkill.group} TOOL</small><p>{selectedSkill.description}</p><div className="item-meter"><span>PROFICIENCY</span><i><em style={{ width: `${selectedSkill.level * 10}%` }} /></i></div><small className="tooltip-hint">SELECT AN ITEM TO INSPECT</small></aside></div></section>}
+      {activeSection === "experience" && <section className="section-wrap content-section view-section"><Heading kicker="COMMUNITY BULLETIN BOARD" title="GUILD CONTRACTS" text="A focused record of the work and lessons behind each chapter." /><div className="bulletin-board">{timeline.map(([year, role, org, text]) => <article className="contract" key={year}><span className="push-pin" /><small>{year}</small><h3>{role}</h3><strong>{org}</strong><p>{text}</p></article>)}</div></section>}
+      {activeSection === "notes" && <section className="section-wrap content-section view-section"><Heading kicker="JOURNAL DESK" title="FIELD NOTES" text="Short thoughts on building products, systems, and better developer habits." /><div className="notes-grid">{notes.map(([type, title]) => <article className="note" key={title}><span>{type}</span><h3>{title}</h3><p>A short note from the workshop, written for thoughtful builders.</p><a href="#contact">READ NOTE <ArrowUpRight /></a></article>)}</div></section>}
+      {activeSection === "contact" && <section className="section-wrap contact-section view-section"><div className="mailbox"><div><span className="stamp">POSTAGE PRE-PAID</span><Heading kicker="HOMESTEAD MAILBOX" title="SEND A LETTER" text="Have a project in mind? Let’s build something useful together." /></div><form onSubmit={event => { event.preventDefault(); setSent(true) }}><label>YOUR NAME<input required name="name" placeholder="Name" /></label><label>YOUR EMAIL<input required type="email" name="email" placeholder="you@example.com" /></label><label>YOUR MESSAGE<textarea required name="message" rows={4} placeholder="Tell me about your project..." /></label><button className="rpg-button primary" type="submit">SEND VIA CARRIER PIGEON <Send /></button>{sent && <p className="form-success">LETTER SENT! I&apos;LL REPLY SOON.</p>}</form></div><div className="contact-links"><a href="https://github.com/nizarfazari" target="_blank" rel="noreferrer">GITHUB</a><a href="https://www.linkedin.com/in/nizarfazari/" target="_blank" rel="noreferrer">LINKEDIN</a><a href="mailto:hello@nizar.dev">EMAIL</a><a className="resume-link" href="/Nizar-Fazari-Resume.pdf" download>DOWNLOAD RESUME <Download /></a></div><small className="contact-credit">© 2025 NIZAR FAZARI · BUILT WITH CARE.</small></section>}
+      </div>
+    </main>
+    <nav className="gameboy-nav" aria-label="Primary navigation"><button type="button" className="gameboy-side-button" onClick={() => navigateRelative(-1)} aria-label="Open previous view"><ChevronLeft /></button><div className="gameboy-tabs">{navigationItems.map((item) => <button type="button" key={item.id} onClick={() => setActiveSection(item.id)} className={activeSection === item.id ? "active" : ""} aria-current={activeSection === item.id ? "page" : undefined}>{item.label}</button>)}</div><button type="button" className="gameboy-side-button" onClick={() => navigateRelative(1)} aria-label="Open next view"><ChevronRight /></button></nav>
+  </div>
 }
-
-function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) { return <div className="stat"><div className="stat-icon">{icon}</div><div><strong>{value}</strong><span>{label}</span></div></div> }
-function SectionHeading({ kicker, title, text }: { kicker: string; title: string; text: string }) { return <div className="section-heading"><span className="eyebrow">{kicker}</span><h2>{title}</h2><p>{text}</p></div> }
+function Heading({ kicker, title, text }: { kicker: string; title: string; text: string }) { return <div className="heading"><span>{kicker}</span><h2>{title}</h2><p>{text}</p></div> }
+function Meter({ label, value, color }: { label: string; value: string; color: string }) { return <div className="meter"><div><span>{label}</span><b>{value}/100</b></div><i><em className={color} style={{ width: `${value}%` }} /></i></div> }

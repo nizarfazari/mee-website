@@ -1,71 +1,25 @@
-"use client"
+import { ArrowDown, ArrowUpRight, MapPin } from "lucide-react"
 
-import { motion } from "framer-motion"
-import { ArrowDown, ArrowUpRight } from "lucide-react"
-
-export function HeroSection() {
+export function HeroSection({ onNavigate }: { onNavigate: (view: string) => void }) {
   return (
-    <section className="hero section-wrap" aria-labelledby="hero-title">
-      <div className="hero-intro">
-        <div className="hero-copy">
-          <div className="eyebrow">
-            <span className="status-dot" /> PLAYER 01 · AVAILABLE FOR NEW QUESTS
-          </div>
-          <h1 id="hero-title">
-            HI, I&apos;M
-            <br />
-            <span>Nizar.</span>
-            <br />
-            I BUILD <i>DIGITAL</i>
-            <br />
-            WORLDS.
-          </h1>
-          <p className="hero-sub">
-            I&apos;m Nizar Fazari, a Software Engineer focused on building reliable,
-            scalable, and thoughtful digital products across frontend, backend, and infrastructure.
-          </p>
-          <div className="hero-actions">
-            <a href="#projects" className="pixel-button primary">
-  VIEW SELECTED WORK <ArrowDown />
-            </a>
-            <a href="#contact" className="pixel-button secondary">
-  LET&apos;S TALK <ArrowUpRight />
-            </a>
-          </div>
-        </div>
-
-        <motion.aside
-          className="player-card"
-          initial={{ opacity: 0, x: 24 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.65, delay: 0.1 }}
-          aria-label="Nizar Fazari player profile"
-        >
-          <div className="player-card-top">
-            <span>PLAYER PROFILE</span>
-            <span className="profile-online"><i /> ONLINE</span>
-          </div>
-          <div className="profile-photo">
-            <span className="profile-level">LVL 07</span>
-            <img src="/pixel-hero.png" alt="Portrait avatar of Nizar Fazari" />
-            <span className="profile-corner profile-corner-top" aria-hidden="true" />
-            <span className="profile-corner profile-corner-bottom" aria-hidden="true" />
-          </div>
-          <div className="profile-name">
-            <small>PLAYER 01</small>
-            <strong>NIZAR FAZARI</strong>
-          </div>
-          <dl className="profile-stats">
-            <div><dt>ROLE</dt><dd>SOFTWARE ENGINEER</dd></div>
-            <div><dt>STATUS</dt><dd>OPEN TO COLLABORATE</dd></div>
-            <div><dt>FOCUS</dt><dd>PRODUCTS &amp; SYSTEMS</dd></div>
-            <div><dt>LOCATION</dt><dd>INDONESIA · GMT+7</dd></div>
-          </dl>
-        </motion.aside>
+    <section className="hero section-wrap" id="top" aria-labelledby="hero-title">
+      <div className="hero-scene" aria-hidden="true">
+        <span className="scene-cloud cloud-one" /><span className="scene-cloud cloud-two" />
+        <div className="hero-plaque"><span>SPRING 18 · YEAR 4</span><b>NIZAR&apos;S WORKSHOP</b><small>BUILDING FROM THE MEADOW</small></div>
+        <span className="scene-tree tree-one" /><span className="scene-tree tree-two" />
+        <span className="scene-cabin"><i /><b /></span>
+        <span className="scene-path" />
       </div>
-
-      <div className="hero-professional-divider" aria-hidden="true">
-        <span>SCROLL TO EXPLORE SELECTED WORK</span>
+      <div className="dialogue-box">
+        <div className="portrait-frame"><img src="/pixel-hero.png" alt="Portrait of Nizar Fazari" /></div>
+        <div className="dialogue-copy">
+          <span className="dialogue-name">NIZAR FAZARI · RESIDENT DEVELOPER</span>
+          <h1 id="hero-title">Hi, I&apos;m Nizar.</h1>
+          <p>I&apos;m a Software Engineer who builds reliable, thoughtful digital products across frontend, backend, and infrastructure.</p>
+          <p className="dialogue-meta"><MapPin /> Indonesia · GMT+7 <b>•</b> Open to collaborate</p>
+          <div className="hero-actions"><button type="button" onClick={() => onNavigate("projects")} className="rpg-button primary">VIEW QUEST LOG <ArrowDown /></button><button type="button" onClick={() => onNavigate("contact")} className="rpg-button">SEND A PIGEON <ArrowUpRight /></button></div>
+        </div>
+        <span className="dialogue-cursor" aria-hidden="true">▼</span>
       </div>
     </section>
   )
