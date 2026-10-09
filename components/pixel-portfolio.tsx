@@ -53,11 +53,8 @@ export function PixelPortfolio() {
     setActiveSection(navigationItems[nextIndex].id)
   }
 
-  return <div className="meadow-site">
-    <header className="hud-header">
-      <div className="hud-main section-wrap"><button className="hud-brand" type="button" onClick={() => setActiveSection("top")}>[ MEADOW.DEV ]</button><span className="hud-location">WORKSHOP MEADOW</span><div className="hud-status"><span>YR 4 · SPR 18</span><strong>99,999G</strong><i>NF</i></div></div>
-      <div className="hud-sub"><div className="section-wrap"><span>ZONE: WORKSHOP MEADOW</span><span>BUFF: +3 PROBLEM SOLVING</span><span>BUFF: +2 COFFEE FOCUS</span></div></div>
-    </header>
+  return <div className={`meadow-site view-${activeSection}`}>
+    <div className="side-scenery" aria-hidden="true"><span className="scenery-tree scenery-left" /><span className="scenery-fence" /><span className="scenery-bush scenery-left-bush" /><span className="scenery-tree scenery-right" /><span className="scenery-mailbox" /><span className="scenery-bush scenery-right-bush" /><span className="scenery-board" /><span className="scenery-chest" /><span className="scenery-lamp" /></div>
     <main className="spa-main">
       <div className="spa-view" key={activeSection}>
       {activeSection === "top" && <><HeroSection onNavigate={setActiveSection} />
