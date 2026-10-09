@@ -1,0 +1,61 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 543 >>
+stream
+BT
+/F1 24 Tf
+72 720 Td
+(Nizar Fazari) Tj
+0 -30 Td
+/F1 12 Tf
+(Software Engineer) Tj
+0 -42 Td
+/F1 10 Tf
+(Indonesia | hello@nizar.dev) Tj
+0 -40 Td
+/F1 14 Tf
+(Profile) Tj
+0 -22 Td
+/F1 10 Tf
+(Product-minded software engineer focused on reliable, scalable digital products.) Tj
+0 -38 Td
+/F1 14 Tf
+(Technical focus) Tj
+0 -22 Td
+/F1 10 Tf
+(TypeScript, React, Next.js, Node.js, product engineering, and UI systems.) Tj
+0 -38 Td
+/F1 14 Tf
+(Portfolio) Tj
+0 -22 Td
+/F1 10 Tf
+(Selected work and contact details are available at the online portfolio.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000247 00000 n 
+0000000841 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+911
+%%EOF

@@ -63,7 +63,7 @@ export function PixelShooterGame() {
   const isVisible = useRef(true)
 
   useEffect(() => {
-    const storedScore = Number(window.localStorage.getItem("bug-blaster-high-score"))
+    const storedScore = Number(window.localStorage.getItem("debug-dungeon-high-score"))
     if (Number.isFinite(storedScore)) setHighScore(storedScore)
   }, [])
 
@@ -224,7 +224,7 @@ export function PixelShooterGame() {
       if (hp <= 0) {
         const nextHighScore = Math.max(highScore, score)
         setHighScore(nextHighScore)
-        window.localStorage.setItem("bug-blaster-high-score", String(nextHighScore))
+        window.localStorage.setItem("debug-dungeon-high-score", String(nextHighScore))
         updateStatus("gameover")
         return
       }
@@ -250,12 +250,12 @@ export function PixelShooterGame() {
   }
 
   return (
-    <div className="arcade-shell" aria-label="Bug Blaster mini game">
+    <div className="arcade-shell" aria-label="Debug Dungeon mini game">
       <div className="arcade-marquee">
         <span>◆</span>
         <div>
-          <small>ARCADE 07</small>
-          <strong>BUG BLASTER</strong>
+          <small>DUNGEON 07</small>
+          <strong>DEBUG DUNGEON</strong>
         </div>
         <span>◆</span>
       </div>
@@ -299,7 +299,7 @@ export function PixelShooterGame() {
             <strong>{String(frame.score).padStart(5, "0")}</strong>
           </div>
           <div className="game-wave">
-            <span>WAVE</span>
+            <span>ROOM</span>
             <strong>{String(frame.wave).padStart(2, "0")}</strong>
           </div>
           <div className="game-hp">
@@ -355,10 +355,10 @@ export function PixelShooterGame() {
 
         {status === "idle" && (
           <div className="game-overlay">
-            <span className="game-kicker">NEW MISSION</span>
+            <span className="game-kicker">CAMP ALERT</span>
             <div className="idle-ship" aria-hidden="true">▲</div>
-            <h2>BUG BLASTER</h2>
-            <p>DEFEND THE CODEBASE!</p>
+            <h2>DEBUG DUNGEON</h2>
+            <p>CLEAR THE GLITCHES!</p>
             <button type="button" className="game-start" onClick={startGame}>
               PRESS START
             </button>
@@ -367,11 +367,11 @@ export function PixelShooterGame() {
 
         {status === "gameover" && (
           <div className="game-overlay game-over">
-            <span className="game-kicker">SYSTEM FAILURE</span>
-            <h2>GAME OVER</h2>
+            <span className="game-kicker">CAMPFIRE FLICKERED</span>
+            <h2>PARTY WIPED</h2>
             <p>SCORE: {String(frame.score).padStart(5, "0")}</p>
             <button type="button" className="game-start" onClick={startGame}>
-              RETRY MISSION
+              RE-ENTER DUNGEON
             </button>
           </div>
         )}

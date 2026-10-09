@@ -20,11 +20,11 @@ type Walker = {
 }
 
 const characters: Character[] = [
-  { id: "nizar", name: "Nizar", role: "PLAYER 01", greeting: "HEY! I'M NIZAR 👋" },
+  { id: "nizar", name: "Nizar", role: "CAMP KEEPER", greeting: "WELCOME TO BASE CAMP! 👋" },
   { id: "frontend", name: "Frontend Mage", role: "FRONTEND MAGE", greeting: "MAKING PIXELS BEHAVE." },
   { id: "backend", name: "Backend Knight", role: "BACKEND KNIGHT", greeting: "THE API IS HEALTHY." },
-  { id: "gamer", name: "Arcade Gamer", role: "ARCADE GAMER", greeting: "ONE MORE ROUND! 🎮" },
-  { id: "basketball", name: "Basketball Player", role: "HOOPS PLAYER", greeting: "LET'S RUN IT! 🏀" },
+  { id: "gamer", name: "Pixel Guide", role: "TRAIL GUIDE", greeting: "THE QUEST LOG IS THIS WAY!" },
+  { id: "basketball", name: "Camp Runner", role: "SIDE-QUEST SCOUT", greeting: "READY FOR THE NEXT LEVEL?" },
 ]
 
 const initialWalkers: Walker[] = [
@@ -116,7 +116,7 @@ export function PixelLobby() {
   return (
     <div className="hero-transition pixel-lobby" aria-label="Interactive pixel character lobby">
       <div className="runner-platform" aria-hidden="true" />
-      <span className="hero-transition-label">DEV WORLD ONLINE · CLICK A PLAYER TO SAY HI</span>
+      <span className="hero-transition-label">BASE CAMP TRAIL · CLICK A TRAVELER TO SAY HI</span>
 
       <PixelPortal side="left" />
       <PixelPortal side="right" />
@@ -175,7 +175,7 @@ export function PixelLobby() {
 function PixelPortal({ side }: { side: "left" | "right" }) {
   return (
     <div className={`pixel-portal portal-${side}`} aria-hidden="true">
-      <span className="portal-sign">{side === "left" ? "IN" : "OUT"}</span>
+      <span className="portal-sign">{side === "left" ? "CAMP" : "TRAIL"}</span>
       <span className="portal-frame"><span className="portal-core" /></span>
       <span className="portal-particle portal-particle-one" />
       <span className="portal-particle portal-particle-two" />

@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion"
 import { ArrowDown, ArrowUpRight } from "lucide-react"
-import { PixelLobby } from "@/components/pixel-lobby"
-import { PixelShooterGame } from "@/components/pixel-shooter-game"
 
 export function HeroSection() {
   return (
@@ -27,11 +25,11 @@ export function HeroSection() {
             scalable, and thoughtful digital products across frontend, backend, and infrastructure.
           </p>
           <div className="hero-actions">
-            <a href="#quests" className="pixel-button primary">
-              VIEW MY QUESTS <ArrowDown />
+            <a href="#projects" className="pixel-button primary">
+  VIEW SELECTED WORK <ArrowDown />
             </a>
             <a href="#contact" className="pixel-button secondary">
-              SAY HELLO <ArrowUpRight />
+  LET&apos;S TALK <ArrowUpRight />
             </a>
           </div>
         </div>
@@ -58,34 +56,17 @@ export function HeroSection() {
             <strong>NIZAR FAZARI</strong>
           </div>
           <dl className="profile-stats">
-            <div><dt>CLASS</dt><dd>PRODUCT ENGINEER</dd></div>
-            <div><dt>STATUS</dt><dd>OPEN TO QUESTS</dd></div>
-            <div><dt>SPECIALTY</dt><dd>IDEAS → INTERFACES</dd></div>
+            <div><dt>ROLE</dt><dd>SOFTWARE ENGINEER</dd></div>
+            <div><dt>STATUS</dt><dd>OPEN TO COLLABORATE</dd></div>
+            <div><dt>FOCUS</dt><dd>PRODUCTS &amp; SYSTEMS</dd></div>
+            <div><dt>LOCATION</dt><dd>INDONESIA · GMT+7</dd></div>
           </dl>
         </motion.aside>
       </div>
 
-      <PixelLobby />
-
-      <motion.div
-        className="hero-game-stage"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.65 }}
-      >
-        <div className="game-stage-heading">
-          <div>
-            <span className="eyebrow">BONUS LEVEL / SIDE QUEST UNLOCKED</span>
-            <h2>BUG BLASTER:<br /><i>DEFEND THE CODEBASE</i></h2>
-          </div>
-          <p>
-            Production bugs are incoming. Pilot the dev ship, protect the codebase,
-            and ship before Friday.
-          </p>
-        </div>
-        <PixelShooterGame />
-      </motion.div>
+      <div className="hero-professional-divider" aria-hidden="true">
+        <span>SCROLL TO EXPLORE SELECTED WORK</span>
+      </div>
     </section>
   )
 }
