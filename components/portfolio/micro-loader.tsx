@@ -1,9 +1,11 @@
 export function MicroLoader() {
   return <div className="micro-loader" role="status" aria-live="polite">
-    <div>
-      <div className="loader-camp" aria-hidden="true"><img src="/campfire-loader.svg" alt="" /></div>
-      <b>OPENING NIZAR&apos;S WORKSHOP</b>
+    <div className="loader-night" aria-hidden="true"><span /><span /><span /><span /></div>
+    <div className="loader-panel">
+      <p>MEADOW GATEWAY</p>
+      <b>PREPARING THE WORKSHOP</b>
       <i><em /></i>
+      <small>LOADING ADVENTURE...</small>
     </div>
   </div>
 }
