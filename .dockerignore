@@ -1,0 +1,25 @@
+# Dependencies and build output are created inside the image
+node_modules
+.next
+
+# Source control and local tooling
+.git
+.gitignore
+.v0-trash
+.snowflake
+.vercel
+
+# Local environment files and logs
+.env
+.env.*
+!.env.example
+*.log
+
+# Editor and OS files
+.DS_Store
+.vscode
+.idea
+
+# Docker files do not need to be copied into the build context
+Dockerfile
+docker-compose.yml
