@@ -64,7 +64,10 @@ export function PixelShooterGame() {
 
   useEffect(() => {
     const storedScore = Number(window.localStorage.getItem("debug-dungeon-high-score"))
-    if (Number.isFinite(storedScore)) setHighScore(storedScore)
+    const scoreTimer = window.setTimeout(() => {
+      if (Number.isFinite(storedScore)) setHighScore(storedScore)
+    }, 0)
+    return () => window.clearTimeout(scoreTimer)
   }, [])
 
   useEffect(() => {
@@ -151,7 +154,7 @@ export function PixelShooterGame() {
       let bullets = game.bullets
         .map((bullet) => ({ ...bullet, y: bullet.y - 62 * delta }))
         .filter((bullet) => bullet.y > -8)
-      let explosions = game.explosions.filter((explosion) => explosion.expiresAt > now)
+      const explosions = game.explosions.filter((explosion) => explosion.expiresAt > now)
       let score = game.score
       let hp = game.hp
 

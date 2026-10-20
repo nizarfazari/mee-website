@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { ArrowDown, ArrowUpRight, MapPin } from "lucide-react"
 
 export function HeroSection({ onNavigate }: { onNavigate: (view: string) => void }) {
@@ -11,7 +12,7 @@ export function HeroSection({ onNavigate }: { onNavigate: (view: string) => void
         <span className="scene-path" />
       </div>
       <div className="dialogue-box">
-        <div className="portrait-frame"><img src="/pixel-hero.png" alt="Portrait of Nizar Fazari" /></div>
+        <div className="portrait-frame"><Image src="/pixel-hero.png" alt="Portrait of Nizar Fazari" width={1254} height={1254} priority /></div>
         <div className="dialogue-copy">
           <span className="dialogue-name">NIZAR FAZARI · RESIDENT DEVELOPER</span>
           <h1 id="hero-title">Hi, I&apos;m Nizar.</h1>
