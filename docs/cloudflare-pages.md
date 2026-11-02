@@ -18,10 +18,28 @@ This repository deploys the static Next.js export in `out/` to Cloudflare Pages 
 
 3. Push to `main`, or use **Actions → Deploy to Cloudflare Pages → Run workflow**.
 
-## Local production deployment
+## Local deployment with an API token
+
+Set the credentials in the current shell, then run the production deployment:
 
 ```bash
+export CLOUDFLARE_ACCOUNT_ID="your-account-id"
+export CLOUDFLARE_API_TOKEN="your-api-token"
 bun run deploy:pages
 ```
 
-The command builds the static export and deploys `out/` to the `main` production branch. It requires `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in the environment.
+`deploy:pages` runs `scripts/deploy-pages-token.sh main main`. The script builds the static export, then deploys `out/` to the `pixel-portfolio` Pages project on the `main` branch.
+
+For a Pages preview deployment:
+
+```bash
+bun run deploy:pages:preview
+```
+
+To choose an app and branch manually:
+
+```bash
+bun run deploy:pages:branch -- main feature/my-branch
+```
+
+The `console` and `docs` app targets are supported by the script for future Pages projects. Configure their project names with `CLOUDFLARE_PAGES_PROJECT_CONSOLE` or `CLOUDFLARE_PAGES_PROJECT_DOCS` before using them.

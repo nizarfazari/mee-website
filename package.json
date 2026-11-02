@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "build:static": "BUILD_TARGET=static next build",
-    "deploy:pages": "bun run build:static && wrangler pages deploy out --project-name pixel-portfolio --branch main",
+    "deploy:pages": "bash scripts/deploy-pages-token.sh main main",
+    "deploy:pages:preview": "bash scripts/deploy-pages-token.sh main preview",
+    "deploy:pages:branch": "bash scripts/deploy-pages-token.sh",
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
