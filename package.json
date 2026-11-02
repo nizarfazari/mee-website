@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:static": "BUILD_TARGET=static next build",
+    "deploy:pages": "bun run build:static && wrangler pages deploy out --project-name pixel-portfolio --branch main",
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -32,6 +34,7 @@
     "eslint-config-next": "^16.4.2",
     "postcss": "^8.5",
     "tailwindcss": "^4.3.3",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "wrangler": "^4.151.2"
   }
 }

@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   openGraph: { title: siteName, description, type: 'website', locale: 'id_ID', siteName: 'Meadow.dev Portfolio' },
   twitter: { card: 'summary', title: siteName, description },
   icons: {
-    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }, { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' }, { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' }],
-    apple: '/apple-icon.png',
+    icon: [{ url: '/icon.png', type: 'image/png' }],
+    apple: '/icon.png',
   },
 }
 

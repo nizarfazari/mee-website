@@ -3,7 +3,7 @@ export function MicroLoader() {
     <div className="loader-night" aria-hidden="true"><span /><span /><span /><span /></div>
     <div className="loader-panel">
       <p>MEADOW GATEWAY</p>
-      <b>PREPARING THE WORKSHOP</b>
+      <b>LOADING PORTFOLIO</b>
       <i><em /></i>
       <small>LOADING ADVENTURE...</small>
     </div>

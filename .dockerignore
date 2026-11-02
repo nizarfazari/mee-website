@@ -1,6 +1,7 @@
 # Dependencies and build output are created inside the image
 node_modules
 .next
+out
 
 # Source control and local tooling
 .git

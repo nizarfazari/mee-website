@@ -21,6 +21,8 @@ export function PixelPortfolio() {
 
   useEffect(() => {
     const loadingTimer = window.setTimeout(() => setIsLoading(false), 420)
+    const requestedView = new URLSearchParams(window.location.search).get("view")
+    if (requestedView && navigationItems.some((item) => item.id === requestedView)) setActiveSection(requestedView)
     const savedTheme = document.cookie.match(/(?:^|; )portfolio-theme=(light|dark)/)?.[1]
     const themeTimer = window.setTimeout(() => {
       if (savedTheme === "dark") setTheme("dark")
