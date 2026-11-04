@@ -62,7 +62,7 @@ export function PixelPortfolio({ initialLocale = "id" }: { initialLocale?: Local
     <main className="spa-main">
       <div className="spa-view" key={activeSection}>
         {activeSection === "top" && <HomeSection locale={locale} onNavigate={setActiveSection} />}
-        {activeSection === "projects" && <ProjectsSection locale={locale} projects={content.projects} />}
+        {activeSection === "projects" && <ProjectsSection locale={locale} projects={content.projects} caseStudies={content.projectCaseStudies} />}
         {activeSection === "skills" && <SkillsSection locale={locale} skills={content.inventorySkills} selectedSkill={selectedSkill} onSelectSkill={setSelectedSkill} />}
         {activeSection === "experience" && <ExperienceSection locale={locale} timeline={content.timeline} />}
         {activeSection === "notes" && <NotesSection locale={locale} notes={content.notes} selectedNote={selectedNote} onSelectNote={setSelectedNote} />}
