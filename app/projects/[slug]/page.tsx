@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowLeft, BriefcaseBusiness, Code2, Wrench } from "lucide-react"
+import { ArrowLeft, BriefcaseBusiness, Code2, ExternalLink, Wrench } from "lucide-react"
 import { notFound } from "next/navigation"
 import { getPortfolioContent } from "@/components/portfolio/data"
 
@@ -38,7 +38,17 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <section><h3>KONTRIBUSI UTAMA</h3><ul>{project.contributions.map((contribution) => <li key={contribution}>{contribution}</li>)}</ul></section>
           <aside><h3><Wrench /> TECH STACK</h3><div className="tech-pills">{projectCard.tech.map((technology) => <span key={technology}>{technology}</span>)}</div></aside>
         </div>
+        {project.features && <section className="project-features"><h3>FITUR UTAMA</h3><div>{project.features.map((feature) => <span key={feature}>{feature}</span>)}</div></section>}
         <section className="project-approach"><h3>PENDEKATAN</h3><p>{project.approach}</p></section>
+        {project.roadmap && <section className="project-roadmap"><header>{project.roadmap.label && <span>{project.roadmap.label}</span>}<h3>{project.roadmap.title}</h3><p>{project.roadmap.text}</p></header><ul>{project.roadmap.items.map((item) => <li key={item}>{item}</li>)}</ul></section>}
+        {(project.liveUrl || project.prdUrl || project.documentationUrl) && <section className="project-links" aria-label="Project links">
+          <h3>LINK PROJECT</h3>
+          <div>
+            {project.liveUrl && <a className="project-link primary" href={project.liveUrl} target="_blank" rel="noreferrer"><span>LIVE APPLICATION</span><strong>Buka aplikasi <ExternalLink /></strong></a>}
+            {project.prdUrl && <a className="project-link" href={project.prdUrl} target="_blank" rel="noreferrer"><span>PRODUCT REQUIREMENTS</span><strong>Buka PRD <ExternalLink /></strong></a>}
+            {project.documentationUrl && <a className="project-link" href={project.documentationUrl} target="_blank" rel="noreferrer"><span>DOKUMENTASI UX & WAWANCARA</span><strong>Buka dokumentasi UX <ExternalLink /></strong></a>}
+          </div>
+        </section>}
       </article>
     </section>
   </main>
