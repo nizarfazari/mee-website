@@ -1,142 +1,91 @@
 import type { NavigationItem } from "./gameboy-nav"
 
-export type Skill = {
-  code: string
-  name: string
-  level: number
-  group: string
-  description: string
+export type Locale = "id" | "en"
+export type Skill = { code: string; name: string; level: number; group: string; description: string }
+export type Note = { category: string; title: string; date: string; readTime: string; excerpt: string; body: string[] }
+export type Project = { name: string; type: string; status: string; text: string; tech: string[]; reward: string; url?: string; linkLabel?: string }
+export type Experience = { id: string; period: string; role: string; organization: string; summary: string; project: string; responsibilities: string[]; technologies: string[] }
+
+export type PortfolioContent = {
+  navigationItems: NavigationItem[]
+  inventorySkills: Skill[]
+  projects: Project[]
+  timeline: Experience[]
+  notes: Note[]
 }
 
-export type Note = {
-  category: string
-  title: string
-  date: string
-  readTime: string
-  excerpt: string
-  body: string[]
+const skills: Skill[] = [
+  { code: "GO", name: "Golang", level: 9, group: "Backend", description: "Used to build and maintain RESTful APIs for business applications." },
+  { code: "PG", name: "PostgreSQL", level: 8, group: "Data", description: "Database design, query optimisation, and indexing for application performance." },
+  { code: "NX", name: "Next.js", level: 8, group: "Frontend", description: "Building frontend components and integrating them with APIs." },
+  { code: "NT", name: "Nuxt.js", level: 8, group: "Frontend", description: "Turning designs into responsive frontend applications." },
+  { code: "RX", name: "React", level: 8, group: "Frontend", description: "Building component-based web applications and frontend features." },
+  { code: "EX", name: "Express", level: 7, group: "Backend", description: "Developing backend services and APIs with JavaScript." },
+  { code: "JS", name: "JavaScript", level: 8, group: "Frontend", description: "The foundation for interactive web application development." },
+  { code: "PHP", name: "PHP", level: 6, group: "Backend", description: "Working knowledge of PHP and Laravel web development fundamentals." },
+  { code: "TW", name: "Tailwind CSS", level: 8, group: "Frontend", description: "Creating consistent, pixel-accurate design implementations." },
+  { code: "GT", name: "Git & GitHub", level: 8, group: "Workflow", description: "Version control and collaborative software development." },
+]
+
+const sharedProjects: Project[] = [
+  { name: "LARASATI", type: "WORK EXPERIENCE", status: "ONGOING", text: "An RKAB reporting application built end-to-end, from API and database design through frontend integration.", tech: ["Golang", "PostgreSQL", "REST API"], reward: "FULLSTACK · PT GBNA" },
+  { name: "Voucher Marketplace", type: "FREELANCE PROJECT", status: "COMPLETED", text: "Translated designs into pixel-accurate frontend components that meet functional requirements.", tech: ["Nuxt.js", "Tailwind CSS", "Git"], reward: "FRONTEND · 2026" },
+  { name: "SETARA", type: "BOOTCAMP PROJECT", status: "COMPLETED", text: "An internet banking web application; led the frontend team, built five pages, and integrated five core features.", tech: ["React", "Vite", "Git"], reward: "SYNRGY ACADEMY" },
+  { name: "Asacita Scholarship", type: "INTERNSHIP PROJECT", status: "COMPLETED", text: "A scholarship website with 26 components built from Figma designs and integrated with backend APIs.", tech: ["Nuxt.js", "Tailwind CSS", "REST API"], reward: "SUITMEDIA · 2023", url: "https://www.asacita.org/" },
+  { name: "EMTEK", type: "INTERNSHIP PROJECT", status: "COMPLETED", text: "Contributed to the frontend by developing and improving Next.js components and integrating more than 20 components with backend APIs.", tech: ["Next.js", "REST API", "Git"], reward: "FRONTEND INTERN · SUITMEDIA · 2023", url: "https://emtek.co.id/en", linkLabel: "VISIT COMPANY WEBSITE" },
+]
+
+const english: PortfolioContent = {
+  navigationItems: [
+    { id: "top", label: "HOME" }, { id: "projects", label: "PROJECTS" }, { id: "skills", label: "SKILLS" },
+    { id: "experience", label: "EXPERIENCE" }, { id: "notes", label: "EDUCATION" }, { id: "contact", label: "CONTACT" },
+  ],
+  inventorySkills: skills,
+  projects: sharedProjects,
+  timeline: [
+    { id: "golden-digital-solution", period: "10 AUG 2026 · PRESENT", role: "Fullstack Developer", organization: "PT Golden Digital Solution", summary: "Currently working as a Fullstack Developer at PT Golden Digital Solution.", project: "Current Position", responsibilities: ["Developing web applications as a Fullstack Developer.", "Contributing frontend and backend features based on product requirements."], technologies: [] },
+    { id: "gawe-becik", period: "FEB 2023 · AUG 2026", role: "Fullstack Developer", organization: "PT Gawe Becik Nadhah Anugerah", summary: "Developed end-to-end web applications and systems for a food and beverage distribution company.", project: "LARASATI · RKAB Reporting Application", responsibilities: ["Gathered business requirements with stakeholders and translated them into system flows and ERDs.", "Developed and maintained RESTful APIs with Golang.", "Designed PostgreSQL databases and optimised queries and indexes for application performance.", "Integrated backend and frontend to present accurate and efficient data.", "Identified and resolved query and system bottlenecks."], technologies: ["Golang", "PostgreSQL", "REST API", "Next.js", "Nuxt.js"] },
+    { id: "freelance-voucher", period: "JAN 2026 · MAR 2026", role: "Frontend Developer", organization: "Freelance · Project-based", summary: "Built a voucher marketplace interface that matched the design and the team’s delivery targets.", project: "Voucher Marketplace", responsibilities: ["Turned designs into frontend components with Nuxt.js and Tailwind CSS.", "Delivered structured tasks based on the Project Manager’s allocation.", "Ensured pixel-accurate implementation and functional requirements.", "Coordinated with the team to deliver work to the agreed timeline."], technologies: ["Nuxt.js", "Tailwind CSS", "Git"] },
+    { id: "synrgy-academy", period: "FEB 2024 · AUG 2024", role: "Fullstack Developer", organization: "SYNRGY Academy · Bootcamp", summary: "Built an internet banking application during a bootcamp and led frontend collaboration.", project: "SETARA · Internet Banking Web Application", responsibilities: ["Built an internet banking web application with React and Vite.", "Led the frontend team and distributed tasks among members.", "Monitored progress and prepared reports for related teams.", "Developed five core pages and integrated five key features."], technologies: ["React", "Vite", "JavaScript", "Git"] },
+    { id: "suitmedia", period: "FEB 2023 · JUN 2023", role: "Frontend Developer Intern", organization: "Suitmedia Digital Agency", summary: "Developed web interfaces and API integrations for digital projects alongside engineering, QA, and supervisors.", project: "EMTEK & Asacita Scholarship", responsibilities: ["Developed and improved Next.js components for EMTEK and integrated more than 20 components with APIs.", "Built 26 Nuxt.js and Tailwind CSS components from Figma designs for Asacita Scholarship.", "Collaborated with Backend Engineers on data integration and adaptation.", "Joined daily stand-ups and coordinated with QA and supervisors to validate requirements."], technologies: ["Next.js", "Nuxt.js", "Tailwind CSS", "REST API", "Figma"] },
+  ],
+  notes: [
+    { category: "EDUCATION", title: "Information Systems — Universitas AMIKOM Yogyakarta", date: "AUG 2020 — OCT 2024", readTime: "GPA 3.94 / 4.00", excerpt: "Studied Information Systems with a foundation in software development and information systems.", body: ["Completed an Information Systems degree at Universitas AMIKOM Yogyakarta in October 2024 with a 3.94 GPA.", "The programme built a foundation in software development, web technology, and information systems."] },
+    { category: "BOOTCAMP", title: "Fullstack Developer — SYNRGY Academy", date: "FEB 2024 — AUG 2024", readTime: "PROJECT: SETARA", excerpt: "Built an internet banking application and led the frontend division in a team environment.", body: ["Built SETARA, an internet banking web application using React and Vite.", "Led the frontend division, distributed tasks, monitored progress, and prepared reports for related teams.", "Built five main pages and integrated five core features."] },
+    { category: "COURSES", title: "Frontend & Web Development Learning Path", date: "MAR 2021 — JAN 2023", readTime: "BINAR · FGA · SANBERCODE", excerpt: "Structured learning in React, JavaScript, Node.js, PHP, Laravel, Git, and Redux.", body: ["Binar Academy: JavaScript frontend development, React lifecycle, Redux, Git and GitHub, and Next.js data fetching.", "FGA Digital Kominfo: frontend development with HTML, CSS, React.js, and object-oriented JavaScript.", "Sanbercode: HTML/CSS fundamentals, object-oriented PHP, Eloquent ORM, seeding, migrations, and Laravel routing."] },
+  ],
 }
 
-export const inventorySkills: Skill[] = [
-  { code: "GO", name: "Golang", level: 9, group: "Backend", description: "Digunakan untuk membangun dan memelihara RESTful API pada aplikasi bisnis." },
-  { code: "PG", name: "PostgreSQL", level: 8, group: "Data", description: "Perancangan database, optimasi query, dan indexing untuk performa aplikasi." },
-  { code: "NX", name: "Next.js", level: 8, group: "Frontend", description: "Membangun serta mengintegrasikan komponen frontend dengan API." },
-  { code: "NT", name: "Nuxt.js", level: 8, group: "Frontend", description: "Menerjemahkan desain menjadi aplikasi frontend yang responsif." },
-  { code: "RX", name: "React", level: 8, group: "Frontend", description: "Membangun aplikasi web dan fitur frontend berbasis komponen." },
-  { code: "EX", name: "Express", level: 7, group: "Backend", description: "Pengembangan layanan backend dan API dengan JavaScript." },
-  { code: "JS", name: "JavaScript", level: 8, group: "Frontend", description: "Fondasi pengembangan aplikasi web interaktif." },
-  { code: "PHP", name: "PHP", level: 6, group: "Backend", description: "Memahami dasar pengembangan web berbasis PHP dan Laravel." },
-  { code: "TW", name: "Tailwind CSS", level: 8, group: "Frontend", description: "Membangun implementasi desain yang konsisten dan pixel-perfect." },
-  { code: "GT", name: "Git & GitHub", level: 8, group: "Workflow", description: "Version control dan kolaborasi pengembangan bersama tim." },
-]
-
-export const projects = [
-  { name: "LARASATI", type: "WORK EXPERIENCE", status: "ONGOING", text: "Aplikasi reporting RKAB yang dibangun end-to-end, dari perancangan API dan database hingga integrasi frontend.", tech: ["Golang", "PostgreSQL", "REST API"], reward: "FULLSTACK · PT GBNA" },
-  { name: "Aplikasi Jual Beli Voucher", type: "FREELANCE PROJECT", status: "COMPLETED", text: "Implementasi desain menjadi komponen frontend yang pixel-perfect dan sesuai kebutuhan fungsional.", tech: ["Nuxt.js", "Tailwind CSS", "Git"], reward: "FRONTEND · 2026" },
-  { name: "SETARA", type: "BOOTCAMP PROJECT", status: "COMPLETED", text: "Aplikasi web internet banking; memimpin tim frontend, membangun lima halaman dan mengintegrasikan lima fitur utama.", tech: ["React", "Vite", "Git"], reward: "SYNRGY ACADEMY" },
-  { name: "Asacita Scholarship", type: "INTERNSHIP PROJECT", status: "COMPLETED", text: "Website scholarship dengan 26 komponen dari desain Figma yang terintegrasi dengan API backend.", tech: ["Nuxt.js", "Tailwind CSS", "REST API"], reward: "SUITMEDIA · 2023", url: "https://www.asacita.org/" },
-  { name: "EMTEK", type: "INTERNSHIP PROJECT", status: "COMPLETED", text: "Kontribusi frontend pada proyek EMTEK: mengembangkan dan memperbaiki komponen Next.js serta mengintegrasikan lebih dari 20 komponen dengan API backend.", tech: ["Next.js", "REST API", "Git"], reward: "FRONTEND INTERN · SUITMEDIA · 2023", url: "https://emtek.co.id/en", linkLabel: "VISIT COMPANY WEBSITE" },
-]
-
-export type Experience = {
-  id: string
-  period: string
-  role: string
-  organization: string
-  summary: string
-  project: string
-  responsibilities: string[]
-  technologies: string[]
+const indonesian: PortfolioContent = {
+  navigationItems: [
+    { id: "top", label: "BERANDA" }, { id: "projects", label: "PROYEK" }, { id: "skills", label: "SKILL" },
+    { id: "experience", label: "PENGALAMAN" }, { id: "notes", label: "PENDIDIKAN" }, { id: "contact", label: "KONTAK" },
+  ],
+  inventorySkills: skills.map((skill) => ({ ...skill, description: ({ GO: "Digunakan untuk membangun dan memelihara RESTful API pada aplikasi bisnis.", PG: "Perancangan database, optimasi query, dan indexing untuk performa aplikasi.", NX: "Membangun serta mengintegrasikan komponen frontend dengan API.", NT: "Menerjemahkan desain menjadi aplikasi frontend yang responsif.", RX: "Membangun aplikasi web dan fitur frontend berbasis komponen.", EX: "Pengembangan layanan backend dan API dengan JavaScript.", JS: "Fondasi pengembangan aplikasi web interaktif.", PHP: "Memahami dasar pengembangan web berbasis PHP dan Laravel.", TW: "Membangun implementasi desain yang konsisten dan pixel-perfect.", GT: "Version control dan kolaborasi pengembangan bersama tim." } as Record<string, string>)[skill.code] })),
+  projects: sharedProjects.map((project) => ({ ...project, linkLabel: project.linkLabel ? "KUNJUNGI WEBSITE PERUSAHAAN" : undefined, type: ({ "WORK EXPERIENCE": "PENGALAMAN KERJA", "FREELANCE PROJECT": "PROYEK FREELANCE", "BOOTCAMP PROJECT": "PROYEK BOOTCAMP", "INTERNSHIP PROJECT": "PROYEK MAGANG" } as Record<string, string>)[project.type] ?? project.type, text: ({ LARASATI: "Aplikasi reporting RKAB yang dibangun end-to-end, dari perancangan API dan database hingga integrasi frontend.", "Voucher Marketplace": "Implementasi desain menjadi komponen frontend yang pixel-perfect dan sesuai kebutuhan fungsional.", SETARA: "Aplikasi web internet banking; memimpin tim frontend, membangun lima halaman dan mengintegrasikan lima fitur utama.", "Asacita Scholarship": "Website scholarship dengan 26 komponen dari desain Figma yang terintegrasi dengan API backend.", EMTEK: "Kontribusi frontend pada proyek EMTEK: mengembangkan dan memperbaiki komponen Next.js serta mengintegrasikan lebih dari 20 komponen dengan API backend." } as Record<string, string>)[project.name] })),
+  timeline: english.timeline.map((item) => ({ ...item })),
+  notes: [],
 }
 
-export const timeline: Experience[] = [
-  {
-    id: "golden-digital-solution",
-    period: "10 AUG 2026 · PRESENT",
-    role: "Fullstack Developer",
-    organization: "PT Golden Digital Solution",
-    summary: "Saat ini bekerja sebagai Fullstack Developer di PT Golden Digital Solution.",
-    project: "Current Position",
-    responsibilities: [
-      "Mengembangkan aplikasi web sebagai Fullstack Developer.",
-      "Berkontribusi pada pengembangan fitur frontend dan backend sesuai kebutuhan produk.",
-    ],
-    technologies: [],
-  },
-  {
-    id: "gawe-becik",
-    period: "FEB 2023 · AUG 2026",
-    role: "Fullstack Developer",
-    organization: "PT Gawe Becik Nadhah Anugerah",
-    summary: "Mengembangkan aplikasi web dan sistem end-to-end untuk perusahaan distribusi makanan dan minuman.",
-    project: "LARASATI · Aplikasi Reporting RKAB",
-    responsibilities: [
-      "Menggali kebutuhan bisnis bersama stakeholder dan menerjemahkannya menjadi flow sistem serta ERD.",
-      "Mengembangkan dan memelihara RESTful API menggunakan Golang.",
-      "Mendesain database PostgreSQL, mengoptimalkan query dan indexing untuk performa aplikasi.",
-      "Mengintegrasikan backend dan frontend agar data tersaji akurat serta efisien.",
-      "Mengidentifikasi dan menyelesaikan bottleneck pada query maupun sistem.",
-    ],
-    technologies: ["Golang", "PostgreSQL", "REST API", "Next.js", "Nuxt.js"],
-  },
-  {
-    id: "freelance-voucher",
-    period: "JAN 2026 · MAR 2026",
-    role: "Frontend Developer",
-    organization: "Freelance · Project-based",
-    summary: "Membangun antarmuka aplikasi jual beli voucher yang sesuai desain dan target delivery tim.",
-    project: "Aplikasi Jual Beli Voucher",
-    responsibilities: [
-      "Mengubah desain menjadi komponen frontend dengan Nuxt.js dan Tailwind CSS.",
-      "Mengerjakan task terstruktur berdasarkan pembagian poin dari Project Manager.",
-      "Memastikan implementasi pixel-perfect dan memenuhi kebutuhan fungsional.",
-      "Berkoordinasi dengan tim agar deliverable selesai sesuai target dan timeline.",
-    ],
-    technologies: ["Nuxt.js", "Tailwind CSS", "Git"],
-  },
-  {
-    id: "synrgy-academy",
-    period: "FEB 2024 · AUG 2024",
-    role: "Fullstack Developer",
-    organization: "SYNRGY Academy · Bootcamp",
-    summary: "Mengembangkan aplikasi internet banking dalam program bootcamp dan memimpin kolaborasi divisi frontend.",
-    project: "SETARA · Internet Banking Web Application",
-    responsibilities: [
-      "Mengembangkan aplikasi website internet banking menggunakan React dan Vite.",
-      "Memimpin divisi Frontend Developer serta membagi tugas kepada anggota tim.",
-      "Melakukan monitoring progres dan menyusun laporan kepada divisi terkait.",
-      "Mengembangkan lima halaman utama dan mengintegrasikan lima fitur utama ke dalam sistem.",
-    ],
-    technologies: ["React", "Vite", "JavaScript", "Git"],
-  },
-  {
-    id: "suitmedia",
-    period: "FEB 2023 · JUN 2023",
-    role: "Frontend Developer Intern",
-    organization: "Suitmedia Digital Agency",
-    summary: "Mengembangkan antarmuka web dan integrasi API untuk proyek digital bersama tim engineering, QA, dan supervisor.",
-    project: "EMTEK & Asacita Scholarship",
-    responsibilities: [
-      "Mengembangkan serta memperbaiki komponen Next.js pada proyek EMTEK dan mengintegrasikan lebih dari 20 komponen dengan API.",
-      "Membangun 26 komponen Nuxt.js dan Tailwind CSS dari desain Figma untuk Asacita Scholarship.",
-      "Berkolaborasi dengan Backend Engineer dalam integrasi dan penyesuaian data.",
-      "Mengikuti daily standup, berkoordinasi dengan QA, dan berdiskusi rutin dengan supervisor untuk validasi requirement.",
-    ],
-    technologies: ["Next.js", "Nuxt.js", "Tailwind CSS", "REST API", "Figma"],
-  },
+indonesian.timeline = [
+  { id: "golden-digital-solution", period: "10 AGU 2026 · SEKARANG", role: "Fullstack Developer", organization: "PT Golden Digital Solution", summary: "Saat ini bekerja sebagai Fullstack Developer di PT Golden Digital Solution.", project: "Posisi Saat Ini", responsibilities: ["Mengembangkan aplikasi web sebagai Fullstack Developer.", "Berkontribusi pada pengembangan fitur frontend dan backend sesuai kebutuhan produk."], technologies: [] },
+  { id: "gawe-becik", period: "FEB 2023 · AGU 2026", role: "Fullstack Developer", organization: "PT Gawe Becik Nadhah Anugerah", summary: "Mengembangkan aplikasi web dan sistem end-to-end untuk perusahaan distribusi makanan dan minuman.", project: "LARASATI · Aplikasi Reporting RKAB", responsibilities: ["Menggali kebutuhan bisnis bersama stakeholder dan menerjemahkannya menjadi flow sistem serta ERD.", "Mengembangkan dan memelihara RESTful API menggunakan Golang.", "Mendesain database PostgreSQL, mengoptimalkan query dan indexing untuk performa aplikasi.", "Mengintegrasikan backend dan frontend agar data tersaji akurat serta efisien.", "Mengidentifikasi dan menyelesaikan bottleneck pada query maupun sistem."], technologies: ["Golang", "PostgreSQL", "REST API", "Next.js", "Nuxt.js"] },
+  { id: "freelance-voucher", period: "JAN 2026 · MAR 2026", role: "Frontend Developer", organization: "Freelance · Project-based", summary: "Membangun antarmuka aplikasi jual beli voucher yang sesuai desain dan target delivery tim.", project: "Aplikasi Jual Beli Voucher", responsibilities: ["Mengubah desain menjadi komponen frontend dengan Nuxt.js dan Tailwind CSS.", "Mengerjakan task terstruktur berdasarkan pembagian poin dari Project Manager.", "Memastikan implementasi pixel-perfect dan memenuhi kebutuhan fungsional.", "Berkoordinasi dengan tim agar deliverable selesai sesuai target dan timeline."], technologies: ["Nuxt.js", "Tailwind CSS", "Git"] },
+  { id: "synrgy-academy", period: "FEB 2024 · AGU 2024", role: "Fullstack Developer", organization: "SYNRGY Academy · Bootcamp", summary: "Mengembangkan aplikasi internet banking dalam program bootcamp dan memimpin kolaborasi divisi frontend.", project: "SETARA · Internet Banking Web Application", responsibilities: ["Mengembangkan aplikasi website internet banking menggunakan React dan Vite.", "Memimpin divisi Frontend Developer serta membagi tugas kepada anggota tim.", "Melakukan monitoring progres dan menyusun laporan kepada divisi terkait.", "Mengembangkan lima halaman utama dan mengintegrasikan lima fitur utama ke dalam sistem."], technologies: ["React", "Vite", "JavaScript", "Git"] },
+  { id: "suitmedia", period: "FEB 2023 · JUN 2023", role: "Frontend Developer Intern", organization: "Suitmedia Digital Agency", summary: "Mengembangkan antarmuka web dan integrasi API untuk proyek digital bersama tim engineering, QA, dan supervisor.", project: "EMTEK & Asacita Scholarship", responsibilities: ["Mengembangkan serta memperbaiki komponen Next.js pada proyek EMTEK dan mengintegrasikan lebih dari 20 komponen dengan API.", "Membangun 26 komponen Nuxt.js dan Tailwind CSS dari desain Figma untuk Asacita Scholarship.", "Berkolaborasi dengan Backend Engineer dalam integrasi dan penyesuaian data.", "Mengikuti daily standup, berkoordinasi dengan QA, dan berdiskusi rutin dengan supervisor untuk validasi requirement."], technologies: ["Next.js", "Nuxt.js", "Tailwind CSS", "REST API", "Figma"] },
 ]
 
-export const navigationItems: NavigationItem[] = [
-  { id: "top", label: "HOME" },
-  { id: "projects", label: "PROJECTS" },
-  { id: "skills", label: "SKILLS" },
-  { id: "experience", label: "EXPERIENCE" },
-  { id: "notes", label: "EDUCATION" },
-  { id: "contact", label: "CONTACT" },
+indonesian.notes = [
+  { category: "PENDIDIKAN", title: "Sistem Informasi — Universitas AMIKOM Yogyakarta", date: "AGU 2020 — OKT 2024", readTime: "IPK 3,94 / 4,00", excerpt: "Menempuh studi Sistem Informasi dengan fondasi pengembangan perangkat lunak dan sistem informasi.", body: ["Menyelesaikan Program Studi Sistem Informasi di Universitas AMIKOM Yogyakarta pada Oktober 2024 dengan IPK 3,94.", "Masa studi membangun fondasi dalam pengembangan perangkat lunak, teknologi web, dan pemahaman sistem informasi."] },
+  { category: "BOOTCAMP", title: "Fullstack Developer — SYNRGY Academy", date: "FEB 2024 — AGU 2024", readTime: "PROYEK: SETARA", excerpt: "Membangun aplikasi internet banking dan memimpin divisi frontend dalam pengembangan tim.", body: ["Mengembangkan SETARA, aplikasi web internet banking menggunakan React dan Vite.", "Memimpin divisi Frontend Developer, membagi tugas, memonitor progres, serta menyusun laporan kepada divisi terkait.", "Membangun lima halaman utama dan mengintegrasikan lima fitur utama ke dalam sistem."] },
+  { category: "KURSUS", title: "Jalur Belajar Frontend & Web Development", date: "MAR 2021 — JAN 2023", readTime: "BINAR · FGA · SANBERCODE", excerpt: "Pembelajaran terstruktur mengenai React, JavaScript, Node.js, PHP, Laravel, Git, dan Redux.", body: ["Binar Academy: mempelajari JavaScript frontend, lifecycle React, Redux, Git dan GitHub, serta data fetching pada Next.js.", "FGA Digital Kominfo: mempelajari pengembangan frontend menggunakan HTML, CSS, React.js, dan OOP JavaScript.", "Sanbercode: mempelajari dasar web HTML/CSS, OOP PHP, Eloquent ORM, seeding, migration, serta routing Laravel."] },
 ]
 
-export const notes: Note[] = [
-  { category: "EDUCATION", title: "Sistem Informasi — Universitas AMIKOM Yogyakarta", date: "AUG 2020 — OCT 2024", readTime: "GPA 3.94 / 4.00", excerpt: "Menempuh studi Sistem Informasi dengan fondasi pengembangan perangkat lunak dan sistem informasi.", body: ["Menyelesaikan Program Studi Sistem Informasi di Universitas AMIKOM Yogyakarta pada Oktober 2024 dengan IPK 3,94.", "Masa studi membangun fondasi dalam pengembangan perangkat lunak, teknologi web, dan pemahaman sistem informasi."] },
-  { category: "BOOTCAMP", title: "Fullstack Developer — SYNRGY Academy", date: "FEB 2024 — AUG 2024", readTime: "PROJECT: SETARA", excerpt: "Membangun aplikasi internet banking dan memimpin divisi frontend dalam pengembangan tim.", body: ["Mengembangkan SETARA, aplikasi web internet banking menggunakan React dan Vite.", "Memimpin divisi Frontend Developer, membagi tugas, memonitor progres, serta menyusun laporan kepada divisi terkait.", "Membangun lima halaman utama dan mengintegrasikan lima fitur utama ke dalam sistem."] },
-  { category: "COURSES", title: "Frontend & Web Development Learning Path", date: "MAR 2021 — JAN 2023", readTime: "BINAR · FGA · SANBERCODE", excerpt: "Pembelajaran terstruktur mengenai React, JavaScript, Node.js, PHP, Laravel, Git, dan Redux.", body: ["Binar Academy: mempelajari JavaScript frontend, lifecycle React, Redux, Git dan GitHub, serta data fetching pada Next.js.", "FGA Digital Kominfo: mempelajari pengembangan frontend menggunakan HTML, CSS, React.js, dan OOP JavaScript.", "Sanbercode: mempelajari dasar web HTML/CSS, OOP PHP, Eloquent ORM, seeding, migration, serta routing Laravel."] },
-]
+export function getPortfolioContent(locale: Locale): PortfolioContent {
+  return locale === "en" ? english : indonesian
+}
+
+export const inventorySkills = indonesian.inventorySkills
+export const projects = indonesian.projects
+export const timeline = indonesian.timeline
+export const notes = indonesian.notes
