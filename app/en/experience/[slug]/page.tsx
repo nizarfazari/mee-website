@@ -32,7 +32,7 @@ export default async function EnglishExperienceDetailPage({ params }: { params: 
         <div className="experience-meta"><span><BriefcaseBusiness /> {experience.organization}</span><span><CalendarDays /> {experience.period}</span></div>
       </header>
       <article className="experience-case-study">
-        <div className="experience-case-heading"><span>PROJECT / CONTRIBUTION</span><h2>{experience.project}</h2></div>
+        <div className="experience-case-heading"><span>ROLE & CONTRIBUTION</span><h2>Key Responsibilities</h2></div>
         <div className={`experience-case-grid${experience.technologies.length ? "" : " no-tech"}`}>
           <section><h3>RESPONSIBILITIES</h3><ul>{experience.responsibilities.map((responsibility) => <li key={responsibility}>{responsibility}</li>)}</ul></section>
           {experience.technologies.length > 0 && <aside><h3><Wrench /> TECH STACK</h3><div className="tech-pills">{experience.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div></aside>}

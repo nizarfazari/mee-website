@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, BriefcaseBusiness, Code2, ExternalLink, Wrench } from "lucide-react"
 import { notFound } from "next/navigation"
@@ -27,6 +28,7 @@ export default async function EnglishProjectDetailPage({ params }: { params: Pro
     <section className="section-wrap project-page-content">
       <Link className="project-back" href="/en?view=projects"><ArrowLeft /> BACK TO PROJECTS</Link>
       <header className="project-hero">
+        <div className="project-cover"><Image src={projectCard.image} alt={projectCard.imageAlt} fill priority sizes="(max-width: 1120px) 100vw, 1024px" /></div>
         <span>PROJECT / CASE STUDY</span>
         <h1>{project.title}</h1>
         <p>{project.overview}</p>

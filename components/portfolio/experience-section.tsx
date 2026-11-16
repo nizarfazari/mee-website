@@ -11,7 +11,7 @@ export function ExperienceSection({ locale, timeline }: { locale: Locale; timeli
       <time className="timeline-date">{experience.period}</time>
       <article className="timeline-card">
         <span className="timeline-dot" aria-hidden="true" />
-        <span className="timeline-card-label">{experience.project}</span><h3>{experience.role}</h3><strong>{experience.organization}</strong><p>{experience.summary}</p>
+        <h3>{experience.role}</h3><strong>{experience.organization}</strong><p>{experience.summary}</p>
         <span className="contract-detail-button">{isEnglish ? "VIEW DETAILS" : "LIHAT DETAIL"} <ArrowUpRight /></span>
       </article>
     </Link>)}</div>

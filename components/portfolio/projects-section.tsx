@@ -1,8 +1,8 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import { Code2 } from "lucide-react"
 import type { Locale, Project, ProjectCaseStudy } from "./data"
 import { Heading } from "./shared"
 
@@ -15,11 +15,11 @@ export function ProjectsSection({ locale, projects, caseStudies }: { locale: Loc
   const isEnglish = locale === "en"
 
   return <section className="section-wrap content-section view-section">
-    <Heading kicker={isEnglish ? "SELECTED WORK" : "KARYA PILIHAN"} title={isEnglish ? "PROJECTS" : "PROYEK"} text={isEnglish ? "Selected personal, freelance, bootcamp, and professional contributions." : "Pilihan kontribusi personal, freelance, bootcamp, dan profesional."} />
+    <Heading kicker={isEnglish ? "SELECTED WORK" : "KARYA PILIHAN"} title={isEnglish ? "PROJECTS" : "PROYEK"} text={isEnglish ? "Selected professional, collaborative, bootcamp, and internship contributions." : "Pilihan kontribusi profesional, kolaborasi, bootcamp, dan magang."} />
     <div className="quest-board">{visibleProjects.map((project) => {
       const hasCaseStudy = Boolean(caseStudies[project.id])
       const content = <article className="quest-card">
-        <div className="quest-preview"><Code2 /><span>{isEnglish ? "PROJECT PREVIEW" : "PRATINJAU PROYEK"}</span></div>
+        <div className="quest-preview"><Image src={project.image} alt={project.imageAlt} fill sizes="(max-width: 560px) 100vw, (max-width: 850px) 125px, 150px" /><span>{isEnglish ? "PROJECT PREVIEW" : "PRATINJAU PROYEK"}</span></div>
         <div className="quest-content">
           <span className="quest-type">{project.type}</span>
           <span className={project.status.startsWith("IN") ? "quest-status active" : "quest-status"}>{project.status}</span>
