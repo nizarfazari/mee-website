@@ -20,6 +20,20 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "stable"
+
+      - name: Check gofmt
+        run: |
+          fmt_out="$(find . -type f -name '*.go' -not -path './.git/*' -print0 | xargs -0r gofmt -l)"
+          if [ -n "$fmt_out" ]; then
+            echo "::error::These files are not gofmt-formatted:"
+            echo "$fmt_out"
+            exit 1
+          fi
+
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
 
